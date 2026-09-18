@@ -5,7 +5,6 @@ import { Countdown } from "@/components/Countdown";
 import { InvitationDoors } from "@/components/InvitationDoors";
 import { Reveal } from "@/components/Reveal";
 import { Rsvp } from "@/components/Rsvp";
-import { WishEnvelope } from "@/components/WishEnvelope";
 const couple = { url: "/images/couple.jpg" };
 const church = { url: "/images/church.jpg" };
 const ceremony = { url: "/images/ceremony.jpg" };
@@ -183,18 +182,6 @@ function Index() {
           </Reveal>
         </section>
 
-        {/* Wishes envelope */}
-        <section className="flex flex-col items-center gap-8 bg-white px-6 py-24 text-center lg:py-32">
-          <Reveal>
-            <p className="text-[0.7rem] tracking-[0.45em] text-olive">სურვილები</p>
-            <h2 className="mt-4 font-display text-2xl font-light text-olive sm:text-3xl lg:text-4xl">
-              სურვილების კონვერტი
-            </h2>
-          </Reveal>
-          <Reveal delay={120}>
-            <WishEnvelope />
-          </Reveal>
-        </section>
 
 
 
