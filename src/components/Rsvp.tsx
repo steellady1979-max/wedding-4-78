@@ -1,7 +1,5 @@
 import { useState } from "react";
-import { useServerFn } from "@tanstack/react-start";
 
-import { saveWeddingResponse } from "@/lib/wedding-responses.functions";
 const cake = { url: "/images/rsvp-cake.png" };
 
 type Answer = "yes" | "no" | null;
@@ -29,7 +27,6 @@ function Card({ children }: { children: React.ReactNode }) {
 }
 
 export function Rsvp() {
-  const saveResponse = useServerFn(saveWeddingResponse);
   const [answer, setAnswer] = useState<Answer>(null);
   const [name, setName] = useState("");
   const [sent, setSent] = useState(false);
@@ -63,15 +60,30 @@ export function Rsvp() {
           if (!canSend || saving) return;
           setSaving(true);
           setError(null);
+
           try {
-            await saveResponse({
-              data: {
-                attending: answer === "yes",
-                name: name.trim(),
+            // ვამზადებთ მონაცემებს ცხრილის სტრუქტურისთვის:
+            // A სვეტი: გაგზავნის დრო, B სვეტი: სახელი გვარი, C სვეტი: სტატუსი
+            const payload = {
+              submittedAt: new Date().toLocaleString(),
+              name: name.trim(),
+              status: answer === "yes" ? "მოდის" : "ვერ მოდის",
+            };
+
+            // პირდაპირ ჩასმული Google Apps Script-ის ვებ-მისამართი
+            const scriptURL = "https://script.google.com/macros/s/AKfycbwlsDb6onI6z_6m_bbKJdw0bl2o_0OYtARIO0bNoDQtdBtXiDo5LDVBaWSyblO2uuv/exec";
+
+            await fetch(scriptURL, {
+              method: "POST",
+              mode: "no-cors", // საჭიროა CORS შეცდომების თავიდან ასაცილებლად
+              headers: {
+                "Content-Type": "application/json",
               },
+              body: JSON.stringify(payload),
             });
+
             setSent(true);
-          } catch {
+          } catch (err) {
             setError("ვერ გაიგზავნა, სცადეთ ხელახლა");
           } finally {
             setSaving(false);
