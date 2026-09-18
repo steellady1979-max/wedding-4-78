@@ -1,6 +1,7 @@
 import { useState } from "react";
+import { useServerFn } from "@tanstack/react-start";
 
-import { weddingDatabase } from "@/lib/wedding-database";
+import { saveWeddingResponse } from "@/lib/wedding-responses.functions";
 const cake = { url: "/images/rsvp-cake.png" };
 
 type Answer = "yes" | "no" | null;
@@ -28,6 +29,7 @@ function Card({ children }: { children: React.ReactNode }) {
 }
 
 export function Rsvp() {
+  const saveResponse = useServerFn(saveWeddingResponse);
   const [answer, setAnswer] = useState<Answer>(null);
   const [name, setName] = useState("");
   const [plusOne, setPlusOne] = useState(false);
@@ -37,8 +39,9 @@ export function Rsvp() {
   const [error, setError] = useState<string | null>(null);
 
   const canSend =
-    answer === "no" ||
-    (answer === "yes" && name.trim().length > 1 && (!plusOne || guestName.trim().length > 1));
+    answer !== null &&
+    name.trim().length > 1 &&
+    (answer === "no" || !plusOne || guestName.trim().length > 1);
 
   if (sent) {
     return (
@@ -65,18 +68,22 @@ export function Rsvp() {
           if (!canSend || saving) return;
           setSaving(true);
           setError(null);
-          const { error: dbError } = await weddingDatabase.from("rsvps").insert({
-            attending: answer === "yes",
-            guest_name: answer === "yes" ? name.trim() : null,
-            plus_one: answer === "yes" && plusOne,
-            plus_one_name: answer === "yes" && plusOne ? guestName.trim() : null,
-          });
-          setSaving(false);
-          if (dbError) {
+          try {
+            await saveResponse({
+              data: {
+                type: "rsvp",
+                attending: answer === "yes",
+                name: name.trim(),
+                plusOne: answer === "yes" && plusOne,
+                plusOneName: answer === "yes" && plusOne ? guestName.trim() : "",
+              },
+            });
+            setSent(true);
+          } catch {
             setError("ვერ გაიგზავნა, სცადეთ ხელახლა");
-            return;
+          } finally {
+            setSaving(false);
           }
-          setSent(true);
         }}
       >
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
@@ -101,7 +108,7 @@ export function Rsvp() {
           ))}
         </div>
 
-        {answer === "yes" && (
+        {answer && (
           <div className="animate-fade-in space-y-4 text-left">
             <label className="block">
               <span className="text-[0.65rem] tracking-[0.3em] text-olive">სახელი, გვარი</span>
@@ -113,17 +120,19 @@ export function Rsvp() {
               />
             </label>
 
-            <label className="flex items-center gap-3 rounded-md bg-olive-mist/50 px-4 py-3 text-sm text-ink/80">
-              <input
-                type="checkbox"
-                checked={plusOne}
-                onChange={(e) => setPlusOne(e.target.checked)}
-                className="h-4 w-4 accent-olive"
-              />
-              +1 თანმხლები პირით
-            </label>
+            {answer === "yes" && (
+              <label className="flex items-center gap-3 rounded-md bg-olive-mist/50 px-4 py-3 text-sm text-ink/80">
+                <input
+                  type="checkbox"
+                  checked={plusOne}
+                  onChange={(e) => setPlusOne(e.target.checked)}
+                  className="h-4 w-4 accent-olive"
+                />
+                +1 თანმხლები პირით
+              </label>
+            )}
 
-            {plusOne && (
+            {answer === "yes" && plusOne && (
               <label className="block animate-fade-in">
                 <span className="text-[0.65rem] tracking-[0.3em] text-olive">
                   თანმხლების სახელი, გვარი
