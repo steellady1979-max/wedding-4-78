@@ -26,7 +26,7 @@ export function WishEnvelope() {
           decoding="async"
           width={900}
           height={1269}
-          className={`w-full transition-transform duration-700 ease-drape ${
+          className={`reveal-image w-full transition-transform duration-700 ease-drape ${
             open ? "-translate-y-2 rotate-[-1deg]" : ""
           }`}
         />

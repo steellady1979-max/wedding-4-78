@@ -38,8 +38,10 @@ export function Reveal({
     <div
       ref={ref}
       style={{ transitionDelay: `${delay}ms` }}
-      className={`transition-all duration-[900ms] ease-out ${
-        shown ? "translate-y-0 opacity-100 blur-0" : "translate-y-8 opacity-0 blur-[2px]"
+      className={`transition-all duration-[1100ms] ease-out motion-reduce:transform-none motion-reduce:transition-none [&_.reveal-image]:transition-all [&_.reveal-image]:duration-[1400ms] [&_.reveal-image]:ease-out [&_.reveal-image]:motion-reduce:transform-none [&_.reveal-image]:motion-reduce:transition-none ${
+        shown
+          ? "translate-y-0 opacity-100 blur-0 [&_.reveal-image]:translate-y-0 [&_.reveal-image]:scale-100 [&_.reveal-image]:opacity-100"
+          : "translate-y-8 opacity-0 blur-[2px] [&_.reveal-image]:translate-y-4 [&_.reveal-image]:scale-[0.985] [&_.reveal-image]:opacity-0"
       } ${className}`}
     >
       {children}

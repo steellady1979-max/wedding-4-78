@@ -77,7 +77,7 @@ function Index() {
       <InvitationDoors onOpened={() => setRevealed(true)} />
 
       <div
-        className={`transition-opacity duration-1000 ease-out ${
+        className={`transition-opacity duration-[1400ms] ease-out ${
           revealed ? "opacity-100" : "opacity-0"
         }`}
       >
@@ -89,7 +89,9 @@ function Index() {
             width={900}
             height={1993}
             decoding="async"
-            className="absolute inset-0 h-full w-full object-cover object-center lg:relative lg:col-start-2 lg:h-[100svh] lg:object-top"
+            className={`absolute inset-0 h-full w-full object-cover object-center transition-all duration-[1800ms] ease-out motion-reduce:transition-none lg:relative lg:col-start-2 lg:h-[100svh] lg:object-top ${
+              revealed ? "scale-100 opacity-100" : "scale-[1.02] opacity-0"
+            }`}
           />
           <div className="absolute inset-0 bg-gradient-to-b from-white/45 via-white/25 to-white/70 lg:hidden" />
 
@@ -128,7 +130,7 @@ function Index() {
               decoding="async"
               width={900}
               height={1269}
-              className="mx-auto w-full object-contain"
+              className="reveal-image mx-auto w-full object-contain"
             />
           </Reveal>
         </section>
@@ -154,7 +156,7 @@ function Index() {
                       alt={item.alt ?? ""}
                       loading="lazy"
                       decoding="async"
-                      className="w-full rounded-lg border border-olive/15 object-cover lg:aspect-[4/5]"
+                      className="reveal-image w-full rounded-lg border border-olive/15 object-cover lg:aspect-[4/5]"
                     />
                   )}
 
