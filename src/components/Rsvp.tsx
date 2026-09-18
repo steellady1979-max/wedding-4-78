@@ -1,6 +1,5 @@
 import { useState } from "react";
 
-import champagne from "@/assets/rsvp-champagne.png.asset.json";
 
 type Answer = "yes" | "no" | null;
 
@@ -12,12 +11,13 @@ function Card({ children }: { children: React.ReactNode }) {
     <div className="w-full max-w-md overflow-hidden rounded-2xl border border-olive/20 bg-white shadow-[0_20px_50px_-30px_rgba(60,70,40,0.45)] lg:max-w-lg">
       <div className="flex items-end justify-center bg-olive-mist/60 px-6 pt-6">
         <img
-          src={champagne.url}
+          src="/images/rsvp-champagne.webp"
           alt="შამპანიოს ჭიქების პირამიდა — ჩანახატი"
           loading="lazy"
           decoding="async"
           width={1362}
           height={1920}
+
           className="reveal-image h-72 w-auto object-contain mix-blend-multiply sm:h-80"
         />
       </div>
