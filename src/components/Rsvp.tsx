@@ -19,7 +19,7 @@ function Card({ children }: { children: React.ReactNode }) {
           decoding="async"
           width={750}
           height={1057}
-          className="h-72 w-auto object-contain mix-blend-multiply sm:h-80"
+          className="reveal-image h-72 w-auto object-contain mix-blend-multiply sm:h-80"
         />
       </div>
       <div className="px-6 pb-10 pt-8 text-center sm:px-8">{children}</div>
