@@ -5,4 +5,4 @@
 - [x] Replace the pre-schedule invitation image and church image
 - [x] Update all schedule times, venues, and map links
 - [x] Update the footer
-- [ ] Verify mobile and desktop presentation and production build
+- [x] Verify mobile and desktop presentation and production build
