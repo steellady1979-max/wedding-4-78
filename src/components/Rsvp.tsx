@@ -1,6 +1,7 @@
 import { useState } from "react";
+import { useServerFn } from "@tanstack/react-start";
 
-import { weddingDatabase } from "@/lib/wedding-database";
+import { saveWeddingResponse } from "@/lib/wedding-responses.functions";
 const cake = { url: "/images/rsvp-cake.png" };
 
 type Answer = "yes" | "no" | null;
@@ -28,6 +29,7 @@ function Card({ children }: { children: React.ReactNode }) {
 }
 
 export function Rsvp() {
+  const saveResponse = useServerFn(saveWeddingResponse);
   const [answer, setAnswer] = useState<Answer>(null);
   const [name, setName] = useState("");
   const [plusOne, setPlusOne] = useState(false);
@@ -65,18 +67,22 @@ export function Rsvp() {
           if (!canSend || saving) return;
           setSaving(true);
           setError(null);
-          const { error: dbError } = await weddingDatabase.from("rsvps").insert({
-            attending: answer === "yes",
-            guest_name: answer === "yes" ? name.trim() : null,
-            plus_one: answer === "yes" && plusOne,
-            plus_one_name: answer === "yes" && plusOne ? guestName.trim() : null,
-          });
-          setSaving(false);
-          if (dbError) {
+          try {
+            await saveResponse({
+              data: {
+                type: "rsvp",
+                attending: answer === "yes",
+                name: answer === "yes" ? name.trim() : "",
+                plusOne: answer === "yes" && plusOne,
+                plusOneName: answer === "yes" && plusOne ? guestName.trim() : "",
+              },
+            });
+            setSent(true);
+          } catch {
             setError("ვერ გაიგზავნა, სცადეთ ხელახლა");
-            return;
+          } finally {
+            setSaving(false);
           }
-          setSent(true);
         }}
       >
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">

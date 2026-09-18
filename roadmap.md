@@ -7,3 +7,6 @@
 - [x] Update the footer
 - [x] Verify mobile and desktop presentation and production build
 - [x] Add lightweight viewport-triggered fade-ins to landing-page photos
+- [ ] Remove the wishes placeholder and refine the wish text styling
+- [ ] Save RSVP and wish submissions to the linked Google Sheet without editing its headings
+- [ ] Verify submissions and the production build

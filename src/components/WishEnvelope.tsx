@@ -1,9 +1,11 @@
 import { useState } from "react";
+import { useServerFn } from "@tanstack/react-start";
 
-import { weddingDatabase } from "@/lib/wedding-database";
+import { saveWeddingResponse } from "@/lib/wedding-responses.functions";
 const envelope = { url: "/images/wish-envelope.png" };
 
 export function WishEnvelope() {
+  const saveResponse = useServerFn(saveWeddingResponse);
   const [open, setOpen] = useState(false);
   const [wish, setWish] = useState("");
   const [sent, setSent] = useState(false);
@@ -47,8 +49,9 @@ export function WishEnvelope() {
                 value={wish}
                 onChange={(e) => setWish(e.target.value)}
                 rows={4}
-                placeholder="დაწერე სურვილი ახალდაქორწინებულებს..."
-                className="w-full rounded-md border border-olive/25 bg-white px-4 py-3 text-sm text-ink outline-none transition-colors placeholder:text-ink/35 focus:border-olive"
+                maxLength={1000}
+                aria-label="სურვილი"
+                className="w-full resize-none rounded-md border border-olive/25 bg-white px-4 py-3 font-display text-lg leading-relaxed text-ink outline-none transition-colors focus:border-olive"
               />
               <button
                 type="button"
@@ -56,15 +59,14 @@ export function WishEnvelope() {
                 onClick={async () => {
                   setSaving(true);
                   setError(null);
-                  const { error: dbError } = await weddingDatabase
-                    .from("wishes")
-                    .insert({ message: wish.trim() });
-                  setSaving(false);
-                  if (dbError) {
+                  try {
+                    await saveResponse({ data: { type: "wish", message: wish.trim() } });
+                    setSent(true);
+                  } catch {
                     setError("ვერ გაიგზავნა, სცადეთ ხელახლა");
-                    return;
+                  } finally {
+                    setSaving(false);
                   }
-                  setSent(true);
                 }}
                 className="w-full rounded-md bg-olive px-6 py-3 text-sm tracking-[0.25em] text-white transition-opacity disabled:opacity-40"
               >
