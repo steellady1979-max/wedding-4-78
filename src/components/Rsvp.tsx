@@ -1,6 +1,5 @@
 import { useState } from "react";
 
-import champagne from "@/assets/rsvp-champagne.png.asset.json";
 
 type Answer = "yes" | "no" | null;
 
