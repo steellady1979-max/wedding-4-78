@@ -39,8 +39,9 @@ export function Rsvp() {
   const [error, setError] = useState<string | null>(null);
 
   const canSend =
-    answer === "no" ||
-    (answer === "yes" && name.trim().length > 1 && (!plusOne || guestName.trim().length > 1));
+    answer !== null &&
+    name.trim().length > 1 &&
+    (answer === "no" || !plusOne || guestName.trim().length > 1);
 
   if (sent) {
     return (
@@ -72,7 +73,7 @@ export function Rsvp() {
               data: {
                 type: "rsvp",
                 attending: answer === "yes",
-                name: answer === "yes" ? name.trim() : "",
+                name: name.trim(),
                 plusOne: answer === "yes" && plusOne,
                 plusOneName: answer === "yes" && plusOne ? guestName.trim() : "",
               },
@@ -107,7 +108,7 @@ export function Rsvp() {
           ))}
         </div>
 
-        {answer === "yes" && (
+        {answer && (
           <div className="animate-fade-in space-y-4 text-left">
             <label className="block">
               <span className="text-[0.65rem] tracking-[0.3em] text-olive">სახელი, გვარი</span>
@@ -119,17 +120,19 @@ export function Rsvp() {
               />
             </label>
 
-            <label className="flex items-center gap-3 rounded-md bg-olive-mist/50 px-4 py-3 text-sm text-ink/80">
-              <input
-                type="checkbox"
-                checked={plusOne}
-                onChange={(e) => setPlusOne(e.target.checked)}
-                className="h-4 w-4 accent-olive"
-              />
-              +1 თანმხლები პირით
-            </label>
+            {answer === "yes" && (
+              <label className="flex items-center gap-3 rounded-md bg-olive-mist/50 px-4 py-3 text-sm text-ink/80">
+                <input
+                  type="checkbox"
+                  checked={plusOne}
+                  onChange={(e) => setPlusOne(e.target.checked)}
+                  className="h-4 w-4 accent-olive"
+                />
+                +1 თანმხლები პირით
+              </label>
+            )}
 
-            {plusOne && (
+            {answer === "yes" && plusOne && (
               <label className="block animate-fade-in">
                 <span className="text-[0.65rem] tracking-[0.3em] text-olive">
                   თანმხლების სახელი, გვარი
