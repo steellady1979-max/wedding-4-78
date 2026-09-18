@@ -32,16 +32,11 @@ export function Rsvp() {
   const saveResponse = useServerFn(saveWeddingResponse);
   const [answer, setAnswer] = useState<Answer>(null);
   const [name, setName] = useState("");
-  const [plusOne, setPlusOne] = useState(false);
-  const [guestName, setGuestName] = useState("");
   const [sent, setSent] = useState(false);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const canSend =
-    answer !== null &&
-    name.trim().length > 1 &&
-    (answer === "no" || !plusOne || guestName.trim().length > 1);
+  const canSend = answer !== null && name.trim().length > 1;
 
   if (sent) {
     return (
@@ -71,11 +66,8 @@ export function Rsvp() {
           try {
             await saveResponse({
               data: {
-                type: "rsvp",
                 attending: answer === "yes",
                 name: name.trim(),
-                plusOne: answer === "yes" && plusOne,
-                plusOneName: answer === "yes" && plusOne ? guestName.trim() : "",
               },
             });
             setSent(true);
@@ -109,43 +101,15 @@ export function Rsvp() {
         </div>
 
         {answer && (
-          <div className="animate-fade-in space-y-4 text-left">
-            <label className="block">
-              <span className="text-[0.65rem] tracking-[0.3em] text-olive">სახელი, გვარი</span>
-              <input
-                className={`mt-2 ${inputClass}`}
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="სახელი გვარი"
-              />
-            </label>
-
-            {answer === "yes" && (
-              <label className="flex items-center gap-3 rounded-md bg-olive-mist/50 px-4 py-3 text-sm text-ink/80">
-                <input
-                  type="checkbox"
-                  checked={plusOne}
-                  onChange={(e) => setPlusOne(e.target.checked)}
-                  className="h-4 w-4 accent-olive"
-                />
-                +1 თანმხლები პირით
-              </label>
-            )}
-
-            {answer === "yes" && plusOne && (
-              <label className="block animate-fade-in">
-                <span className="text-[0.65rem] tracking-[0.3em] text-olive">
-                  თანმხლების სახელი, გვარი
-                </span>
-                <input
-                  className={`mt-2 ${inputClass}`}
-                  value={guestName}
-                  onChange={(e) => setGuestName(e.target.value)}
-                  placeholder="სახელი გვარი"
-                />
-              </label>
-            )}
-          </div>
+          <label className="block animate-fade-in text-left">
+            <span className="text-[0.65rem] tracking-[0.3em] text-olive">სახელი, გვარი</span>
+            <input
+              className={`mt-2 ${inputClass}`}
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="სახელი გვარი"
+            />
+          </label>
         )}
 
         {answer && (
