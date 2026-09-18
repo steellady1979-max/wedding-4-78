@@ -2,21 +2,12 @@ import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 
 const SPREADSHEET_ID = "1ox2JdavVqjsrm-Fm6BXPVA_QVBQe6eEX4JAkDuS2oqQ";
-const SHEET_RANGE = "'1ფურცელი'!A:G";
+const SHEET_RANGE = "'1ფურცელი'!A:C";
 
-const responseSchema = z.discriminatedUnion("type", [
-  z.object({
-    type: z.literal("rsvp"),
-    attending: z.boolean(),
-    name: z.string().trim().max(120),
-    plusOne: z.boolean(),
-    plusOneName: z.string().trim().max(120),
-  }),
-  z.object({
-    type: z.literal("wish"),
-    message: z.string().trim().min(3).max(1000),
-  }),
-]);
+const responseSchema = z.object({
+  attending: z.boolean(),
+  name: z.string().trim().min(2).max(120),
+});
 
 export const saveWeddingResponse = createServerFn({ method: "POST" })
   .inputValidator((data) => responseSchema.parse(data))
@@ -34,18 +25,7 @@ export const saveWeddingResponse = createServerFn({ method: "POST" })
       timeZone: "Asia/Tbilisi",
     }).format(new Date());
 
-    const values =
-      data.type === "rsvp"
-        ? [
-            submittedAt,
-            "დასწრება",
-            data.attending ? "კი" : "არა",
-            data.name,
-            data.plusOne ? "კი" : "არა",
-            data.plusOneName,
-            "",
-          ]
-        : [submittedAt, "სურვილი", "", "", "", "", data.message];
+    const values = [submittedAt, data.name, data.attending ? "მოდის" : "ვერ მოდის"];
 
     const response = await fetch(
       `https://connector-gateway.lovable.dev/google_sheets/v4/spreadsheets/${SPREADSHEET_ID}/values/${SHEET_RANGE}:append?valueInputOption=USER_ENTERED&insertDataOption=INSERT_ROWS`,
