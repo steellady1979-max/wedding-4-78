@@ -6,4 +6,4 @@
 - [x] Update all schedule times, venues, and map links
 - [x] Update the footer
 - [x] Verify mobile and desktop presentation and production build
-- [ ] Add lightweight viewport-triggered fade-ins to landing-page photos
+- [x] Add lightweight viewport-triggered fade-ins to landing-page photos
