@@ -10,35 +10,34 @@ const couple = { url: "/images/couple.jpg" };
 const church = { url: "/images/church.jpg" };
 const ceremony = { url: "/images/ceremony.jpg" };
 const dinner = { url: "/images/dinner.jpg" };
-const invitation = { url: "/images/wedding-invitation.jpg" };
+const invitation = { url: "/images/wedding-invitation.webp" };
 
-const TITLE = "ალექსანდრე & მარიამი — 17 ოქტომბერი 2026";
+const TITLE = "ნუგო & თაკო — 24 ოქტომბერი 2026";
 const DESCRIPTION =
-  "ალექსანდრე და მარიამი გვთხოვთ გაგვიზიაროთ ჩვენი ქორწილის დღე — 17 ოქტომბერი 2026, ჯვრისწერა 14:00."
+  "ნუგო და თაკო გვთხოვენ გაგვიზიაროთ მათი ქორწილის დღე — 24 ოქტომბერი 2026, ჯვრისწერა 13:00.";
 
-const SHUAGULI_MAP =
-  "https://www.google.com/maps/place/Shuaguli+-+Event+Venue/@41.9179964,44.6600594,17z/data=!3m1!4b1!4m6!3m5!1s0x4044618efa8ffee9:0xcf2a926a77e5e201!8m2!3d41.9179964!4d44.6626343!16s%2Fg%2F11hdynb1k3?hl=is&entry=ttu";
+const MERA_MAP = "https://maps.app.goo.gl/DW6szoQci3iQdipx6?g_st=iw";
 
 const SCHEDULE = [
   {
-    time: "14:00",
+    time: "13:00",
     title: "ჯვრისწერა",
-    href: "https://maps.app.goo.gl/BMZYm7LTAfFjGm7FA?g_st=ic",
+    href: "https://maps.app.goo.gl/cghiHUXy2PwyayW87?g_st=iw",
     image: church.url,
     alt: "ჯვრისწერის ეკლესია — აკვარელის ნახატი",
   },
   {
     time: "17:00",
-    title: "ხელის მოწერის ცერემონია შუაგულში",
+    title: "ხელის მოწერის ცერემონია — მერე",
     image: ceremony.url,
-    href: SHUAGULI_MAP,
+    href: MERA_MAP,
     alt: "ცერემონიის სივრცე თეთრი სკამებითა და ყვავილებით",
   },
   {
-    time: "19:00",
-    title: "ვახშამი",
+    time: "18:00",
+    title: "ვახშამი — ლისი მერე",
     image: dinner.url,
-    href: SHUAGULI_MAP,
+    href: MERA_MAP,
     alt: "სადღესასწაულო სუფრა სანთლებითა და კალებით ფანჯარასთან",
   },
 ];
@@ -97,12 +96,12 @@ function Index() {
           <div className="relative animate-fade-in rounded-xl bg-white/70 px-8 py-10 backdrop-blur-[2px] lg:col-start-1 lg:row-start-1 lg:flex lg:h-full lg:flex-col lg:items-center lg:justify-center lg:rounded-none lg:bg-champagne lg:px-16 lg:text-center lg:backdrop-blur-none">
             <p className="text-[0.7rem] tracking-[0.45em] text-olive">ჩვენი ქორწილი</p>
             <h1 className="mt-6 flex flex-col items-center gap-2 font-display text-3xl font-light leading-tight text-olive sm:text-5xl lg:text-6xl">
-              <span>ალექსანდრე</span>
+              <span>ნუგო</span>
               <span className="text-xl text-olive-soft sm:text-3xl">&</span>
-              <span>მარიამი</span>
+              <span>თაკო</span>
             </h1>
             <div className="hairline mx-auto mt-8 w-40 lg:w-56" />
-            <p className="mt-6 text-sm tracking-[0.3em] text-ink/70 lg:text-base">17 · 10 · 2026</p>
+            <p className="mt-6 text-sm tracking-[0.3em] text-ink/70 lg:text-base">24 · 10 · 2026</p>
           </div>
         </section>
 
@@ -115,7 +114,7 @@ function Index() {
             </h2>
           </Reveal>
           <Reveal delay={120} className="w-full max-w-md lg:max-w-xl">
-            <Countdown target="2026-10-17T14:00:00+04:00" />
+            <Countdown target="2026-10-24T13:00:00+04:00" />
           </Reveal>
         </section>
 
@@ -127,8 +126,8 @@ function Index() {
               alt="საქორწილო მოსაწვევი კონვერტთან და თეთრ ლილიასთან ერთად"
               loading="lazy"
               decoding="async"
-              width={1000}
-              height={1410}
+              width={900}
+              height={1269}
               className="mx-auto w-full object-contain"
             />
           </Reveal>
@@ -198,8 +197,8 @@ function Index() {
 
 
         <footer className="bg-olive px-6 py-12 text-center">
-          <p className="font-display text-lg font-light text-white">ალექსანდრე & მარიამი</p>
-          <p className="mt-2 text-[0.7rem] tracking-[0.35em] text-white/70">17 ოქტომბერი 2026</p>
+          <p className="font-display text-lg font-light text-white">ნუგო & თაკო</p>
+          <p className="mt-2 text-[0.7rem] tracking-[0.35em] text-white/70">24 ოქტომბერი 2026</p>
         </footer>
       </div>
     </main>
