@@ -71,7 +71,7 @@ export function Rsvp() {
             };
 
             // პირდაპირ ჩასმული Google Apps Script-ის ვებ-მისამართი
-            const scriptURL = "https://script.google.com/macros/s/AKfycbwlsDb6onI6z_6m_bbKJdw0bl2o_0OYtARIO0bNoDQtdBtXiDo5LDVBaWSyblO2uuv/exec";
+            const scriptURL = "https://script.google.com/macros/s/AKfycbwlsDb6onI6z_6m_bbKJdw0bl2o_0OYtARIO0bNoDQtdBtXiDo5LDVBaWSyblO22uuv/exec";
 
             await fetch(scriptURL, {
               method: "POST",
