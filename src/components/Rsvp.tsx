@@ -75,9 +75,11 @@ export function Rsvp() {
 
             await fetch(scriptURL, {
               method: "POST",
-              mode: "no-cors", // საჭიროა CORS შეცდომების თავიდან ასაცილებლად
+              mode: "no-cors",
+              // text/plain არის CORS-safe ტიპი და Apps Script-ს JSON body უცვლელად მიეწოდება.
+              // application/json no-cors რეჟიმში request-ს ბლოკავდა/არასწორად აგზავნიდა.
               headers: {
-                "Content-Type": "application/json",
+                "Content-Type": "text/plain;charset=utf-8",
               },
               body: JSON.stringify(payload),
             });
