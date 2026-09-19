@@ -13,7 +13,7 @@ const invitation = { url: "/images/wedding-invitation.webp" };
 
 const TITLE = "ნუგო & თაკო — 24 ოქტომბერი 2026";
 const DESCRIPTION = "გეპატიჟებით ჩვენს ქორწილში";
-const SOCIAL_IMAGE = "https://nugo-tako.vercel.app/images/wedding-invitation.webp";
+const SOCIAL_IMAGE = "https://nugo-tako.vercel.app/images/couple-share-preview.jpg";
 
 const MERA_MAP = "https://maps.app.goo.gl/DW6szoQci3iQdipx6?g_st=iw";
 
@@ -51,10 +51,14 @@ export const Route = createFileRoute("/")({
       { property: "og:description", content: DESCRIPTION },
       { property: "og:type", content: "website" },
       { property: "og:image", content: SOCIAL_IMAGE },
+      { property: "og:image:width", content: "768" },
+      { property: "og:image:height", content: "1024" },
+      { property: "og:image:alt", content: "ნუგო და თაკო" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: TITLE },
       { name: "twitter:description", content: DESCRIPTION },
       { name: "twitter:image", content: SOCIAL_IMAGE },
+      { name: "twitter:image:alt", content: "ნუგო და თაკო" },
     ],
     links: [
       {

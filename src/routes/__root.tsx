@@ -86,13 +86,17 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:type", content: "website" },
       {
         property: "og:image",
-        content: "https://nugo-tako.vercel.app/images/wedding-invitation.webp",
+        content: "https://nugo-tako.vercel.app/images/couple-share-preview.jpg",
       },
+      { property: "og:image:width", content: "768" },
+      { property: "og:image:height", content: "1024" },
+      { property: "og:image:alt", content: "ნუგო და თაკო" },
       { name: "twitter:card", content: "summary_large_image" },
       {
         name: "twitter:image",
-        content: "https://nugo-tako.vercel.app/images/wedding-invitation.webp",
+        content: "https://nugo-tako.vercel.app/images/couple-share-preview.jpg",
       },
+      { name: "twitter:image:alt", content: "ნუგო და თაკო" },
     ],
     links: [
       {
