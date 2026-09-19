@@ -39,7 +39,9 @@ export function Rsvp() {
     return (
       <Card>
         <p className="animate-fade-in font-display text-xl font-light text-olive">
-          {answer === "yes" ? "გმადლობთ! ველოდებით." : "გმადლობთ პასუხისთვის."}
+          {answer === "yes"
+            ? `გელოდებით დიდი სიყვარულით, ${name.trim()}`
+            : `მადლობა პასუხისთვის, ${name.trim()}`}
         </p>
       </Card>
     );
