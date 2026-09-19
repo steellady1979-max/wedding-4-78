@@ -12,8 +12,8 @@ const dinner = { url: "/images/dinner.jpg" };
 const invitation = { url: "/images/wedding-invitation.webp" };
 
 const TITLE = "ნუგო & თაკო — 24 ოქტომბერი 2026";
-const DESCRIPTION =
-  "ნუგო და თაკო გვთხოვენ გაგვიზიაროთ მათი ქორწილის დღე — 24 ოქტომბერი 2026, ჯვრისწერა 13:00.";
+const DESCRIPTION = "გეპატიჟებით ჩვენს ქორწილში";
+const SOCIAL_IMAGE = "https://nugo-tako.vercel.app/images/wedding-invitation.webp";
 
 const MERA_MAP = "https://maps.app.goo.gl/DW6szoQci3iQdipx6?g_st=iw";
 
@@ -50,7 +50,11 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: TITLE },
       { property: "og:description", content: DESCRIPTION },
       { property: "og:type", content: "website" },
+      { property: "og:image", content: SOCIAL_IMAGE },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: TITLE },
+      { name: "twitter:description", content: DESCRIPTION },
+      { name: "twitter:image", content: SOCIAL_IMAGE },
     ],
     links: [
       {
