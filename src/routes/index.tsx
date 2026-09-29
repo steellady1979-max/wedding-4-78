@@ -21,7 +21,7 @@ const SCHEDULE = [
   {
     time: "13:00",
     title: "ჯვრისწერა",
-    href: "https://maps.app.goo.gl/cghiHUXy2PwyayW87?g_st=iw",
+    href: "https://www.google.com/maps/search/%E1%83%AC%E1%83%9B+%E1%83%92%E1%83%A0%E1%83%98%E1%83%92%E1%83%9D%E1%83%9A+%E1%83%A4%E1%83%94%E1%83%A0%E1%83%90%E1%83%AB%E1%83%98%E1%83%A1+%E1%83%A1%E1%83%90%E1%83%AE%E1%83%94%E1%83%9A%E1%83%9D%E1%83%91%E1%83%98%E1%83%A1+%E1%83%9B%E1%83%9D%E1%83%9C%E1%83%90%E1%83%A1%E1%83%A2%E1%83%94%E1%83%A0%E1%83%98/@41.6583617,44.7279051,651m/data=!3m2!1e3!4b1?entry=ttu&g_ep=EgoyMDI2MDkyNy4wIKXMDSoASAFQAw%3D%3D",
     image: church.url,
     alt: "ჯვრისწერის ეკლესია — აკვარელის ნახატი",
   },
